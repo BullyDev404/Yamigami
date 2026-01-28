@@ -1,10 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
-// import Layout from "./components/layout/Layout";
-// import Progress from "./pages/Progress"
+import Progress from "./pages/Progress";
 import Settings from "./pages/Settings";
 import Layout from "./components/layout/Layout";
+import TrainingMode from "./pages/TrainingMode";
 
 function App() {
   return (
@@ -12,7 +11,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          {/* <Route path="progress" element={<Progress />} /> */}
+          <Route path="training-mode" element={<TrainingMode />} />
+          <Route path="progress" element={<Progress />} />
           <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>

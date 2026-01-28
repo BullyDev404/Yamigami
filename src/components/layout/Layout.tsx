@@ -8,14 +8,14 @@ const Layout = (): JSX.Element => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    if (window.innerWidth >= 768) setSidebarOpen(true);
+    if (window.innerWidth >= 768) setSidebarOpen(false);
   }, []);
 
   return (
     <div className="h-screen grid grid-cols-[auto_1fr] overflow-hidden">
       <aside
         className={`
-          h-screen transition-all duration-300
+          h-screen transition-all duration-200
           ${sidebarOpen ? "w-64" : "w-0 md:w-20"}
         `}
       >
