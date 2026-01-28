@@ -45,7 +45,7 @@ function Home() {
           <Typing text="Master the skill that separates good players from great ones. Close your eyes, open your mind, and train your ability to see the entire board without looking..." />
         </p>
 
-        <button className="rounded-md bg-gradient-to-r shadow-2xl from-purple-600 to-pink-600 px-3 py-2.5 w-fit hover:shadow-xl hover:backdrop-blur-2xl transition-all duration-300">
+        <button className="rounded-md bg-linear-to-r shadow-2xl from-purple-600 to-pink-600 px-3 py-2.5 w-fit hover:shadow-xl hover:backdrop-blur-2xl transition-all duration-300">
           <Link to="/train" className="text-white font-semibold">
             Start Training
           </Link>

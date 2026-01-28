@@ -31,7 +31,7 @@ const Layout = (): JSX.Element => {
           </div>
         </main>
 
-        <div className="text-xs font-semibold text-stone-500 flex items-center gap-2">
+        <div className="text-xs font-semibold text-stone-500 flex px-5 py-3 justify-end items-center gap-2">
           <span>Built by</span>
           <a
             href="https://github.com/bullydev404"
@@ -41,7 +41,7 @@ const Layout = (): JSX.Element => {
           >
             Bullydev
           </a>
-          <span>&copy; 2025</span>
+          <span>&copy; 2026</span>
         </div>
       </div>
     </div>
