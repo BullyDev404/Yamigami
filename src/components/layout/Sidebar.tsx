@@ -26,7 +26,7 @@ function Sidebar({ isOpen, onToggle }: SidebarProps) {
       onMouseLeave={() => onToggle(false)}
       className={`
         h-full flex flex-col bg-purple-500/10 text-black
-        transition-all duration-300 ease-in-out
+        transition-all duration-250 ease-in-out
         ${isOpen ? "w-44" : "w-20"}
       `}
     >
@@ -38,11 +38,11 @@ function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 <NavLink
                   to={to}
                   className={({ isActive }) =>
-                    `flex items-center justify-center py-2 rounded-xl backdrop-blur-sm bg-purple-200/30 hover:bg-white/50 hover:shadow-lg transition-all
-                    ${isActive ? "border-2 border-purple-700" : "border-none"}`
+                    `flex items-center justify-center py-2 rounded-xl backdrop-blur-sm bg-purple-200/30 hover:bg-purple-700/50 hover:shadow-lg transition-all
+                    ${isActive ? "text-white shadow-sm border-purple-700/50 bg-purple-700/50" : "border-none"}`
                   }
                 >
-                  {isOpen ? name : icon}
+                  {isOpen ? <div className="flex items-center justify-between gap-2 text-sm w-full px-2"><div>{icon}</div> <div className="flex justify-start font-semibold w-full">{name}</div></div> : icon}
                 </NavLink>
               </li>
             ))}

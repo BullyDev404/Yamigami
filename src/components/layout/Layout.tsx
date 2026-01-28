@@ -16,7 +16,7 @@ const Layout = (): JSX.Element => {
       <aside
         className={`
           h-screen transition-all duration-200
-          ${sidebarOpen ? "w-64" : "w-0 md:w-20"}
+          ${sidebarOpen ? "w-44" : "w-20 md:w-20"}
         `}
       >
         <Sidebar isOpen={sidebarOpen} onToggle={setSidebarOpen} />
@@ -25,7 +25,7 @@ const Layout = (): JSX.Element => {
       {/* Main content area */}
       <div className="grid grid-rows-[auto_1fr] overflow-hidden">
         <Header />
-        <main className="overflow-auto p-4 md:p-8">
+        <main className="max-h-full overflow-auto ">
           <div className="max-w-8xl mx-auto">
             <Outlet />
           </div>
