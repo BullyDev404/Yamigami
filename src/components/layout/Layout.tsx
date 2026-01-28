@@ -30,6 +30,19 @@ const Layout = (): JSX.Element => {
             <Outlet />
           </div>
         </main>
+
+        <div className="text-xs font-semibold text-stone-500 flex items-center gap-2">
+          <span>Built by</span>
+          <a
+            href="https://github.com/bullydev404"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-400 hover:text-purple-300 transition-colors underline decoration-dotted"
+          >
+            Bullydev
+          </a>
+          <span>&copy; 2025</span>
+        </div>
       </div>
     </div>
   );

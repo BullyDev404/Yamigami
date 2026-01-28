@@ -34,12 +34,14 @@ function ChessBoard({
           darkSquareStyle: { backgroundColor: darkSquare },
           lightSquareStyle: { backgroundColor: lightSquare },
           draggingPieceGhostStyle: { opacity: ghostOpacity },
-          showBoardNotation: notation,
-          animationDuration,
+          showNotation: notation,
+          canDragPiece: draggable,
+          animationDurationInMs: animationDuration,
           boardStyle,
           draggingPieceStyle,
           squareStyles: highlightSquares,
         }}
+        // notation={false}
         position={position}
         boardWidth={size}
         arePiecesDraggable={draggable}

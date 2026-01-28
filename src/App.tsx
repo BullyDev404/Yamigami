@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="training-mode" element={<TrainingMode />} />
+          <Route path="train" element={<TrainingMode />} />
           <Route path="progress" element={<Progress />} />
           <Route path="settings" element={<Settings />} />
         </Route>
