@@ -3,7 +3,7 @@ import { Chess } from "chess.js";
 import ChessBoard from "../../ui/Chessboard";
 import { Miniatures } from "../../data/Miniatures";
 
-const AutoplayBoard: React.FC = () => {
+const AutoplayBoard: React.FC<{ size?: number }> = ({ size = 420 }) => {
   const [gameIndex, setGameIndex] = useState(0);
   const [game, setGame] = useState(new Chess());
   const [moveIndex, setMoveIndex] = useState(0);
@@ -21,7 +21,7 @@ const AutoplayBoard: React.FC = () => {
   }, [gameIndex]);
 
   useEffect(() => {
-    let timer: any;
+    let timer;
 
     if (moveIndex < moveHistory.length) {
       timer = setTimeout(() => {
@@ -41,14 +41,13 @@ const AutoplayBoard: React.FC = () => {
     return () => clearTimeout(timer);
   }, [moveIndex, moveHistory, game, gameIndex]);
 
-
   return (
     <ChessBoard
       id="autoplay-board"
       position={game.fen()}
-      darkSquare="#782ead" 
+      darkSquare="#782ead"
       lightSquare="white"
-
+      size={size}
     />
   );
 };

@@ -1,44 +1,28 @@
-// // import Chessboard from "../ui/Chessboard";
-// import AutoPlayBoard from "../components/training/AutoPlayBoard";
-// import PageWrapper from "../ui/PageWrapper";
-
-// function TrainingMode() {
-//   return (
-//     <PageWrapper>
-//     <div className="ax-w-7xl m-auto justify-center h-full mt-10">
-//       <h1 className="text-center text-2xl font-bold">Select Training Mode</h1>
-
-//       <div className="flex items-center justify-between px-25 border-r gap-10 mt-10 ">
-//         <div className="border-r-2 border-purple-950 w-full flex-1">
-
-//           <AutoPlayBoard />
-//         </div>
-//         <div className="w-full flex-1">list of modes would go here</div>
-//       </div>
-//     </div>
-//     </PageWrapper>
-//   );
-// }
-
-// export default TrainingMode;
-
-import React, { useState } from "react";
+import { useState, type JSX } from "react";
 import { motion } from "framer-motion";
 import AutoplayBoard from "../components/training/AutoPlayBoard";
+import {
+  FaPalette,
+  FaMapMarkerAlt,
+  FaChessKnight,
+  FaEye,
+  FaBrain,
+} from "react-icons/fa";
+import { PiTargetBold } from "react-icons/pi";
 
-// Types for better safety
-type Difficulty = "easy" | "medium" | "hard";
+type Difficulty = "easy" | "medium" | "hard" | "expert";
 
 interface TrainingMode {
   id: string;
-  icon: string;
+  icon: JSX.Element;
   title: string;
   description: string;
   difficulty: Difficulty;
   stars: number;
+  bestFor: string;
 }
 
-const Training: React.FC = () => {
+const Training = () => {
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
 
   const toggleFavorite = (id: string, e: React.MouseEvent) => {
@@ -51,169 +35,207 @@ const Training: React.FC = () => {
   const trainingModes: TrainingMode[] = [
     {
       id: "square-name",
-      icon: "🎯",
-      title: "Square Name Recognition",
-      description: "Identify the highlighted square by typing its coordinate",
+      icon: <PiTargetBold />,
+      title: "Square Recognition",
+      description: "Type the name of the highlighted square",
       difficulty: "easy",
       stars: 1,
+      bestFor: "Learning notation",
     },
     {
       id: "square-color",
-      icon: "🎨",
-      title: "Square Color Recognition",
-      description: "Determine if the highlighted square is light or dark",
+      icon: <FaPalette />,
+      title: "Color Recognition",
+      description: "Identify if the square is light or dark",
       difficulty: "easy",
       stars: 1,
+      bestFor: "Pattern recognition",
     },
     {
       id: "coordinate-click",
-      icon: "📍",
+      icon: <FaMapMarkerAlt />,
       title: "Coordinate Click",
-      description: "Click on the square when shown its coordinate",
+      description: "Click the square when given coordinates",
       difficulty: "medium",
       stars: 2,
-    },
-    // Adding a few more to test the scroll
-    {
-      id: "knight-path",
-      icon: "🐎",
-      title: "Knight Vision",
-      description: "Find the shortest path for a knight to reach a square",
-      difficulty: "hard",
-      stars: 3,
+      bestFor: "Speed training",
     },
     {
-      id: "Oh yeah another random",
-      icon: "☕",
-      title: "lorem ipsum",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-      difficulty: "hard",
-      stars: 3,
+      id: "knight-moves",
+      icon: <FaChessKnight />,
+      title: "Knight Movement",
+      description: "Click all legal knight moves from position",
+      difficulty: "medium",
+      stars: 2,
+      bestFor: "Piece visualization",
     },
     {
-      id: "Another random thing",
-      icon: "🐐",
-      title: "Knight Vision",
-      description: "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      id: "piece-vision",
+      icon: <FaBrain />,
+      title: "Piece Placement",
+      description: "Memorize and recall piece positions",
       difficulty: "hard",
       stars: 3,
+      bestFor: "Board memory",
     },
     {
-      id: "Some Random stuff",
-      icon: "⚡",
-      title: "Knight Vision",
-      description: "Find the shortest path for a knight to reach a square",
+      id: "blindfold-moves",
+      icon: <FaEye />,
+      title: "Blindfold Moves",
+      description: "Calculate moves without seeing the board",
       difficulty: "hard",
       stars: 3,
-    },
-    {
-      id: "Bullet bralw",
-      icon: "🚅",
-      title: "Knight Vision",
-      description: "Find the shortest path for a knight to reach a square",
-      difficulty: "hard",
-      stars: 3,
+      bestFor: "Advanced visualization",
     },
   ];
 
   const userStats: any = {
-    "square-name": { bestScore: 9, totalQuestions: 10, timesPlayed: 5 },
+    "square-name": {
+      bestScore: 9,
+      totalQuestions: 10,
+      timesPlayed: 5,
+      avgTime: 23,
+    },
+    "square-color": {
+      bestScore: 18,
+      totalQuestions: 20,
+      timesPlayed: 3,
+      avgTime: 15,
+    },
+  };
+
+  const getDifficultyColor = (difficulty: Difficulty) => {
+    switch (difficulty) {
+      case "easy":
+        return "border-cyan-400 text-cyan-400";
+      case "medium":
+        return "border-amber-500 text-amber-400";
+      case "hard":
+        return "border-purple-500 text-purple-400";
+      case "expert":
+        return "border-purple-500 text-purple-400";
+      default:
+        return "border-gray-500 text-gray-500";
+    }
   };
 
   return (
-    <>
-      <h1 className="text-3xl font-black text-white tracking-tight text-center">
-        Master the <span className="text-purple-500">Board</span>
-      </h1>
-      <div className="mb-6">
-        <p className="text-gray-400 mt-2 text-center">
-          Level up your board vision and speed.
-        </p>
-      </div>
-      <div className="flex flex-col lg:flex-row gap-10 h-[80vh] max-w-7xl mx-auto px-4 mt-6">
-        {/* LEFT: Chessboard Visual */}
-        <div className="hidden lg:flex flex-1 items-center justify-center">
-          <div className="absolute inset-0 bg-linear-to-br from-purple-600/10 to-transparent pointer-events-none" />
-          <div className="transform transition-transform duration-700 group-hover:scale-105">
-            <AutoplayBoard
-              id="training-preview"
-              size={600}
-              darkSquare="#581c87" // Deep Purple
-              lightSquare="#f3e8ff" // Light Purple/White
-            />
-          </div>
-          <p className="absolute bottom-6 text-purple-200/50 font-medium tracking-widest text-xs uppercase">
-            Training Preview Mode
-          </p>
-        </div>
+    <div className="pt-10 sm:20 lg:pt-0 h-[calc(100vh-6rem)] flex flex-col overflow-hidden">
+      {/* Header Section */}
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="shrink-0 text-center pt-6 pb-4 px-4"
+      >
+        {/* Main Title */}
+        <h1 className="text-4xl md:text-5xl font-bold font-space-grotesk mb-1 tracking-tight">
+          <span className="text-purple-500">Training</span>{" "}
+          <span className="text-cyan-400">Arena</span>
+        </h1>
 
-        {/* RIGHT: Scrollable List */}
-        <div className="flex-1 flex flex-col h-full overflow-hidden">
-          {/* CUSTOM SCROLL CONTAINER */}
-          <div className="flex-1 overflow-y-auto pr-4 space-y-4 custom-scrollbar">
-            {trainingModes.map((mode) => {
+        {/* Description */}
+        <p className="text-sm text-gray-500 max-w-2xl mx-auto leading-relaxed">
+          Select a training mode below to enhance your pattern recognition,
+          coordinate memory, and tactical vision skills.
+        </p>
+      </motion.div>
+
+      {/* Main Content - Fixed Height, No Page Scroll */}
+      <div className="flex-1 flex flex-col lg:flex-row gap-5 px-4 md:px-8 pb-6 min-h-0 max-w-7xl mx-auto w-full">
+        {/* LEFT: Chessboard */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="flex lg:w-1/2 items-center justify-center max-h-150"
+        >
+          <AutoplayBoard size={420} />
+        </motion.div>
+
+        {/* RIGHT: Scrollable List (Hidden Scrollbar) */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="flex-1 lg:w-1/2 overflow-y-auto hide-scrollbar max-h-full"
+        >
+          {/* ///////////////////////CONTAINER SCROLLER ////////////////*/}
+          <div className="space-y-3 pr-4">
+            {/*///////////////////////// MAPPING//////////////////////// */}
+            {trainingModes.map((mode, index) => {
               const stats = userStats[mode.id];
               const isFav = favoriteIds.includes(mode.id);
 
               return (
                 <motion.div
-                  whileHover={{ x: 10 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2, delay: index * 0.05 }}
+                  whileHover={{ x: 6, scale: 1.03 }}
                   key={mode.id}
-                  className="group relative bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-all cursor-pointer shadow-lg"
+                  className="group relative bg-gray-900 rounded-xl p-4 hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500 hover:shadow-opacity-20 transition-all cursor-pointer backdrop-blur-sm overflow-x-auto"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-5">
-                      {/* ICON CIRCLE */}
-                      <div className="w-14 h-14 rounded-xl bg-purple-600/20 flex items-center justify-center text-3xl border border-purple-500/30 group-hover:bg-purple-600/40 transition-colors">
-                        {mode.icon}
-                      </div>
+                  <div className="flex items-center gap-4">
+                    {/* Icon */}
+                    <div className="w-12 h-12 rounded-lg  bg-opacity-20 border border-white border-opacity-40 flex items-center justify-center text-white text-xl group-hover:bg-opacity-30 transition-all shrink-0">
+                      {mode.icon}
+                    </div>
 
-                      <div>
-                        <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+
+                      <div className="flex items-center gap-2 mb-1 ">
+                        <h3 className="text-base font-semibold text-white truncate">
                           {mode.title}
                         </h3>
-                        <div className="flex items-center gap-3 mt-1">
-                          <span
-                            className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full border ${
-                              mode.difficulty === "hard"
-                                ? "border-red-500/50 text-red-400"
-                                : "border-purple-500/50 text-purple-400"
-                            }`}
-                          >
-                            {mode.difficulty}
-                          </span>
-                          <span className="text-gray-500 text-xs">
-                            {mode.description.substring(0, 40)}...
-                          </span>
-                        </div>
+                        <span className="text-cyan-400 text-sm">
+                          {"🗡️".repeat(mode.stars)}
+                        </span>
+                      </div>
+
+                      <p className="text-xs text-gray-400 mb-2 truncate">
+                        {mode.description}
+                      </p>
+
+                      <div className="flex items-center gap-2">
+                        <span
+                          className={`text-[8px] uppercase font-bold px-2 py-0.5 rounded-full border ${getDifficultyColor(mode.difficulty)}`}
+                        >
+                          {mode.difficulty}
+                        </span>
+                        <span className="text-[10px] text-gray-500 italic truncate">
+                          {mode.bestFor}
+                        </span>
                       </div>
                     </div>
 
-                    {/* STATS & FAV */}
-                    <div className="flex items-center gap-6">
+                    {/* Stats & Favorite */}
+                    <div className="flex items-center gap-3 shrink-0">
                       <div className="text-right hidden sm:block">
                         {stats ? (
                           <div className="space-y-0.5">
-                            <p className="text-white font-mono font-bold text-lg">
+                            <p className="text-cyan-400 font-bold text-sm">
                               {stats.bestScore}
-                              <span className="text-gray-500 text-sm">
+                              <span className="text-gray-500 text-xs">
                                 /{stats.totalQuestions}
                               </span>
                             </p>
-                            <p className="text-[10px] text-purple-400 uppercase tracking-tighter font-bold">
-                              Played {stats.timesPlayed}x
+                            <p className="text-[10px] text-gray-500">
+                              {stats.timesPlayed}x • {stats.avgTime}s
                             </p>
                           </div>
                         ) : (
                           <p className="text-gray-600 text-xs italic">
-                            Unplayed
+                            Not played
                           </p>
                         )}
                       </div>
 
+                      {/* Favorite Button */}
                       <button
                         onClick={(e) => toggleFavorite(mode.id, e)}
-                        className={`text-2xl transition-all duration-300 transform hover:scale-125 ${isFav ? "text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]" : "text-gray-600 hover:text-gray-400"}`}
+                        className={`text-xl transition-all ${isFav ? "text-amber-400 scale-110" : "text-gray-600 hover:text-gray-400"}`}
                       >
                         {isFav ? "★" : "☆"}
                       </button>
@@ -223,27 +245,20 @@ const Training: React.FC = () => {
               );
             })}
           </div>
-        </div>
-
-        {/* Tailwind Custom Scrollbar CSS (Add to your global CSS) */}
-        <style>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(168, 85, 247, 0.4);
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(168, 85, 247, 0.7);
-          }
-      `}</style>
+        </motion.div>
       </div>
-    </>
+
+      {/* Hide Scrollbar CSS */}
+      <style>{`
+        .hide-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;  /* Chrome, Safari, Opera */
+        }
+      `}</style>
+    </div>
   );
 };
 

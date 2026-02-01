@@ -1,4 +1,4 @@
-# YAMIGAMI Color Palette
+<!-- # YAMIGAMI Color Palette
 
 ## Core Brand Colors
 
@@ -150,7 +150,7 @@ className = "bg-yamigami-purple hover:bg-yamigami-purple-light";
 className = "bg-yamigami-cyan hover:bg-yamigami-cyan-light";
 
 // Gradient button
-className = "bg-gradient-to-r from-yamigami-purple to-yamigami-cyan";
+className = "bg-linear-to-r from-yamigami-purple to-yamigami-cyan";
 ```
 
 ### Backgrounds
@@ -161,7 +161,7 @@ className = "bg-yamigami-bg-midnight border border-yamigami-purple/30";
 
 // Page background
 className =
-  "bg-gradient-to-br from-yamigami-bg-void via-yamigami-bg-dark to-black";
+  "bg-linear-to-br from-yamigami-bg-void via-yamigami-bg-dark to-black";
 ```
 
 ### Text
@@ -219,7 +219,7 @@ className = "border border-yamigami-purple shadow-lg shadow-yamigami-purple/50";
 ### Gradient text
 
 ```tsx
-<h1 className="bg-gradient-to-r from-yamigami-purple to-yamigami-cyan bg-clip-text text-transparent">
+<h1 className="bg-linear-to-r from-yamigami-purple to-yamigami-cyan bg-clip-text text-transparent">
   YAMIGAMI
 </h1>
-```
+``` -->

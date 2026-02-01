@@ -5,12 +5,6 @@ export const Miniatures: {
   year: string;
 }[] = [
   {
-    name: "Fool's Mate",
-    pgn: "1. f3 e5 2. g4 Qh4#",
-    players: "The Shortest Checkmate",
-    year: "Classic",
-  },
-  {
     name: "Scholar's Mate",
     pgn: "1. e4 e5 2. Bc4 Nc6 3. Qh5 Nf6 4. Qxf7#",
     players: "Beginner's Trap",
@@ -21,6 +15,12 @@ export const Miniatures: {
     pgn: "1. e4 e5 2. Nf3 d6 3. Bc4 Bg4 4. Nc3 g6 5. Nxe5 Bxd1 6. Bxf7+ Ke7 7. Nd5#",
     players: "Légal de Kermeur",
     year: "1750",
+  },
+  {
+    name: "Fool's Mate",
+    pgn: "1. f3 e5 2. g4 Qh4#",
+    players: "The Shortest Checkmate",
+    year: "Classic",
   },
   {
     name: "Greco's Mate",
