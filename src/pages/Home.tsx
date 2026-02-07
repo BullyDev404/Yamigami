@@ -46,7 +46,7 @@ function Home() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          className="md:hidden w-full max-w-[400px] sm:max-w-[320px] mx-auto my-4 shadow-xl shadow-black/50 rounded-xl"
+          className="md:hidden w-full max-w-100 sm:max-w-[320px] mx-auto my-4 shadow-xl shadow-black/50 rounded-xl"
         >
           <ChessBoard
             id="home-board-mobile"

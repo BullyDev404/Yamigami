@@ -9,6 +9,7 @@ import {
   FaBrain,
 } from "react-icons/fa";
 import { PiTargetBold } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 type Difficulty = "easy" | "medium" | "hard" | "expert";
 
@@ -20,10 +21,13 @@ interface TrainingMode {
   difficulty: Difficulty;
   stars: number;
   bestFor: string;
+  path:string;
 }
 
 const Training = () => {
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
+
+  const navigate = useNavigate();
 
   const toggleFavorite = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -41,6 +45,7 @@ const Training = () => {
       difficulty: "easy",
       stars: 1,
       bestFor: "Learning notation",
+      path: "/train/square-name"
     },
     {
       id: "square-color",
@@ -50,6 +55,8 @@ const Training = () => {
       difficulty: "easy",
       stars: 1,
       bestFor: "Pattern recognition",
+      path:"/train/square-color"
+
     },
     {
       id: "coordinate-click",
@@ -59,6 +66,7 @@ const Training = () => {
       difficulty: "medium",
       stars: 2,
       bestFor: "Speed training",
+      path: "/train/coordinate-click"
     },
     {
       id: "knight-moves",
@@ -68,6 +76,7 @@ const Training = () => {
       difficulty: "medium",
       stars: 2,
       bestFor: "Piece visualization",
+      path:"/train/knight-moves"
     },
     {
       id: "piece-vision",
@@ -77,6 +86,7 @@ const Training = () => {
       difficulty: "hard",
       stars: 3,
       bestFor: "Board memory",
+      path: "/train/piece-vision"
     },
     {
       id: "blindfold-moves",
@@ -86,10 +96,11 @@ const Training = () => {
       difficulty: "hard",
       stars: 3,
       bestFor: "Advanced visualization",
+      path: "/train/blindfold-moves"
     },
   ];
 
-  const userStats: any = {
+  const userStats = {
     "square-name": {
       bestScore: 9,
       totalQuestions: 10,
@@ -118,6 +129,12 @@ const Training = () => {
         return "border-gray-500 text-gray-500";
     }
   };
+
+
+  function handleNavigate(path:string):void{
+    console.log('working')
+    navigate(path);
+  }
 
   return (
     <div className="pt-10 sm:20 lg:pt-0 h-[calc(100vh-6rem)] flex flex-col overflow-hidden">
@@ -164,7 +181,7 @@ const Training = () => {
           <div className="space-y-3 pr-4">
             {/*///////////////////////// MAPPING//////////////////////// */}
             {trainingModes.map((mode, index) => {
-              const stats = userStats[mode.id];
+              const stats:any = userStats[mode.id];
               const isFav = favoriteIds.includes(mode.id);
 
               return (
@@ -174,6 +191,7 @@ const Training = () => {
                   transition={{ duration: 0.2, delay: index * 0.05 }}
                   whileHover={{ x: 6, scale: 1.03 }}
                   key={mode.id}
+                  onClick={()=>handleNavigate(mode.path)}
                   className="group relative bg-gray-900 rounded-xl p-4 hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500 hover:shadow-opacity-20 transition-all cursor-pointer backdrop-blur-sm overflow-x-auto"
                 >
                   <div className="flex items-center gap-4">
@@ -184,7 +202,6 @@ const Training = () => {
 
                     {/* Content */}
                     <div className="flex-1 min-w-0">
-
                       <div className="flex items-center gap-2 mb-1 ">
                         <h3 className="text-base font-semibold text-white truncate">
                           {mode.title}
